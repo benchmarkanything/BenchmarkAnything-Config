@@ -46,11 +46,11 @@ sub _read_config
         require YAML::Any;
 
         # don't look into user's homedir if we are running tests
-        my $default_cfgfile = $ENV{HARNESS_ACTIVE} ? "t/benchmarkanything.cfg" : File::HomeDir->my_home . "/.benchmarkanything/default.cfg";
+        my $default_cfgfile = $ENV{HARNESS_ACTIVE} ? "t/benchmarkanything.cfg" : $ENV{BENCHMARKANYTHING_CONFIGFILE} || File::HomeDir->my_home . "/.benchmarkanything/default.cfg";
 
         # read file
         eval {
-                $self->{cfgfile} = $self->{cfgfile} || $ENV{BENCHMARKANYTHING_CONFIGFILE} || $default_cfgfile;
+                $self->{cfgfile} = $self->{cfgfile} || $default_cfgfile;
                 my $cfg_yaml;
                 open (my $CFG, "<", $self->{cfgfile}) or die "Can't read: ".$self->{cfgfile}."\n";
                 {
