@@ -9,8 +9,13 @@ require BenchmarkAnything::Config;
 my $cfg1 = BenchmarkAnything::Config->new;
 is($cfg1->{benchmarkanything}{storage}{backend}{sql}{dsn}, "dbi:SQLite:t/benchmarkanything.sqlite", "cfg 1");
 
-$ENV{BENCHMARKANYTHING_CONFIGFILE} = "t/benchmarkanything-2.cfg";
-my $cfg2 = BenchmarkAnything::Config->new;
+my $cfg2;
+{
+    local $ENV{HARNESS_ACTIVE} = 0; # otherwise we would not interpret BENCHMARKANYTHING_CONFIGFILE
+    local $ENV{BENCHMARKANYTHING_CONFIGFILE} = "t/benchmarkanything-2.cfg";
+    $cfg2 = BenchmarkAnything::Config->new;
+}
+
 is($cfg2->{benchmarkanything}{storage}{backend}{sql}{dsn}, "dbi:SQLite:t/benchmarkanything-alternative.sqlite", "cfg 2");
 
 my $cfg3 = BenchmarkAnything::Config->new(cfgfile => "t/benchmarkanything-3.cfg");
