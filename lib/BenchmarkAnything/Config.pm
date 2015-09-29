@@ -32,7 +32,7 @@ sub new
 Internal function.
 
 Reads the config file; either from given file name, or env variable
-C<BENCHMARKANYTHING_CONFIGFILE> or C<$home/.benchmarkanything.cfg>.
+C<BENCHMARKANYTHING_CONFIGFILE> or C<$HOME/.benchmarkanything.cfg>.
 
 Returns the object to allow chained method calls.
 

@@ -15,7 +15,6 @@ my $cfg2;
     local $ENV{BENCHMARKANYTHING_CONFIGFILE} = "t/benchmarkanything-2.cfg";
     $cfg2 = BenchmarkAnything::Config->new;
 }
-
 is($cfg2->{benchmarkanything}{storage}{backend}{sql}{dsn}, "dbi:SQLite:t/benchmarkanything-alternative.sqlite", "cfg 2");
 
 my $cfg3 = BenchmarkAnything::Config->new(cfgfile => "t/benchmarkanything-3.cfg");
